@@ -1,0 +1,9 @@
+{
+  "pluginId": "neobase.bleachdle",
+  "repo": "NDesumeur/neobase-plugin-bleachdle",
+  "version": "1.0.1",
+  "sha256": "320edefa6c1e3281902bb49d46b3b4d6b53732f884a9b37a5ba8c42360bb3ad8",
+  "approvedAt": "2026-10-31T17:51:20.939Z",
+  "neobase": ">=4.0.0",
+  "signature": "v1+bbgpI/ttZTLqg4lBo5f9LPdrgRRiVfIOKv81yYFVWX7ao5S2JAAQQgXXUR1/KJxfcKsPH33znQWoXonqsBg=="
+}
