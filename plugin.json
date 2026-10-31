@@ -1,0 +1,19 @@
+{
+  "id": "neobase.bleachdle",
+  "name": "BleachDle",
+  "version": "1.0.0",
+  "author": "NDesumeur",
+  "description": "Devine un personnage de Bleach : colonnes comparées, indices, emoji et portrait.",
+  "icon": "icon.png",
+  "entry": "index.js",
+  "view": "bleachdle",
+  "neobase": ">=4.0.0",
+  "type": "app",
+  "category": "NeoDle",
+  "mobile": false,
+  "system": false,
+  "dependencies": {},
+  "permissions": [
+    "full"
+  ]
+}
