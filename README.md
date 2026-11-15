@@ -37,3 +37,9 @@ Ta série, tes statistiques et la partie du jour en cours sont enregistrées par
 Dans NeoDex : **NeoStore → À découvrir → BleachDle → Installer**.
 
 Développer un plugin : voir le [SDK NeoDex](https://github.com/NDesumeur/neodex-sdk).
+
+## Nouveautés de la version 1.4.0
+
+- **Bandeau illustré** en haut du jeu : les murs blancs du Seireitei, à la Soul Society, dessiné en pixel art, avec les portraits des personnages principaux.
+- **Textes plus grands** : zone de saisie, suggestions, indices, en-têtes et cases du tableau.
+- **Cases à la bonne taille** : les colonnes sont plus larges, chaque case grandit en hauteur pour son texte, et un mot trop long pour sa case y est écrit un peu plus petit au lieu de déborder.

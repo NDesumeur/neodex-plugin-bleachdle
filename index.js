@@ -10,34 +10,34 @@ const HTML = "";
 .gSel{width:auto;font-size:14px;padding:6px 10px;margin-right:8px}
 .shGrid td.num{text-align:right}
 .mdClue{display:flex;flex-direction:column;gap:8px}
-.mdHint{--fill:var(--field);padding:10px 14px;color:var(--lilac);font-size:15px}
+.mdHint{--fill:var(--field);padding:12px 16px;color:var(--lilac);font-size:18px;line-height:1.35}
 .mdEmoji{--fill:var(--field);padding:14px;font-size:34px;letter-spacing:6px;text-align:center}
 .mdForm{position:relative}
-.mdInput{width:100%;font-size:16px;padding:12px 14px}
+.mdInput{width:100%;font-size:21px;padding:14px 16px}
 .mdSug{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:5;--fill:#120922;display:flex;flex-direction:column;padding:4px;max-height:340px;overflow-y:auto}
-.mdSugItem{all:unset;cursor:var(--cp,pointer);display:flex;justify-content:space-between;gap:12px;padding:8px 10px;color:#fff;font-size:15px}
+.mdSugItem{all:unset;cursor:var(--cp,pointer);display:flex;justify-content:space-between;gap:12px;padding:8px 10px;color:#fff;font-size:18px}
 .mdSugItem:hover,.mdSugItem.on{background:rgba(var(--mgr),.22)}
-.mdSugItem .hint{font-size:12px}
+.mdSugItem .hint{font-size:15px}
 .mdSugItem .n{display:flex;align-items:center;gap:10px}
 .mdSugItem img{width:30px;height:30px;object-fit:cover;object-position:top;box-shadow:0 0 0 2px rgba(0,0,0,.45)}
 .sysCard.mdWin{flex-direction:row;align-items:center;gap:18px}
-.mdWin b{color:#ffd07a;font-size:17px}
+.mdWin b{color:#ffd07a;font-size:20px}
 .mdWinTxt{display:flex;flex-direction:column;gap:6px;min-width:0}
 .mdWinImg{width:104px;height:104px;flex:none;object-fit:cover;object-position:top;box-shadow:0 0 0 3px #ffd07a,4px 4px 0 3px rgba(0,0,0,.45)}
 .mdPix{width:240px;height:240px;align-self:center;image-rendering:pixelated;box-shadow:0 0 0 3px var(--field),6px 6px 0 3px rgba(0,0,0,.45)}
 .mdGuesses{display:flex;flex-direction:column;gap:6px;overflow-x:auto}
 .mdRow{display:grid;gap:6px}
 .mdRow.head{position:sticky;top:0}
-.mdH{font:7px var(--title);letter-spacing:1px;color:var(--muted);text-align:center;padding:4px 0}
-.mdCell{display:flex;align-items:center;justify-content:center;gap:4px;min-height:54px;padding:6px;text-align:center;font-size:12px;overflow-wrap:break-word;hyphens:auto;min-width:0;color:#fff;background:#2a1d52;box-shadow:inset 0 -3px 0 rgba(0,0,0,.35);animation:mdFlip .35s steps(4) backwards}
+.mdH{font:9px/1.5 var(--title);letter-spacing:1px;color:var(--muted);text-align:center;padding:4px 2px;overflow-wrap:break-word;min-width:0}
+.mdCell{display:flex;align-items:center;justify-content:center;gap:4px;height:auto;flex-wrap:wrap;min-height:62px;padding:6px 4px;text-align:center;font-size:15px;line-height:1.25;overflow-wrap:break-word;hyphens:auto;min-width:0;color:#fff;background:#2a1d52;box-shadow:inset 0 -3px 0 rgba(0,0,0,.35);animation:mdFlip .35s steps(4) backwards}
 .mdCell.who{background:#1c1238;font-weight:bold;justify-content:flex-start;gap:8px;text-align:left}
 .mdCell.who img{width:40px;height:40px;flex:none;object-fit:cover;object-position:top;box-shadow:0 0 0 2px rgba(0,0,0,.45)}
 .mdCell.wide img{width:32px;height:32px}
 .mdCell.ok{background:#2f8f5a}
 .mdCell.part{background:#c0862a}
 .mdCell.no{background:#9a2a44}
-.mdCell i{font-style:normal;font-size:18px;color:#ffd07a}
-.mdCell.wide{justify-content:flex-start;padding:10px 14px;min-height:0;font-size:15px}
+.mdCell i{font-style:normal;font-size:1.2em;color:#ffd07a}
+.mdCell.wide{justify-content:flex-start;padding:10px 14px;min-height:0;font-size:17px}
 .mdRow .mdCell:nth-child(2){animation-delay:.05s}
 .mdRow .mdCell:nth-child(3){animation-delay:.1s}
 .mdRow .mdCell:nth-child(4){animation-delay:.15s}
@@ -50,7 +50,7 @@ const HTML = "";
 /* habillage v1.2 */
 .dleWrap{--dle:#ff5ad9;gap:14px}
 .dleWrap .agHead{padding:14px 18px;background:linear-gradient(90deg,color-mix(in srgb,var(--dle) 32%,#0d0820),transparent 85%);box-shadow:inset 5px 0 0 var(--dle)}
-.dleWrap .agHead .label{font-size:16px;letter-spacing:2px;color:#fff;text-shadow:3px 3px 0 rgba(0,0,0,.55)}
+.dleWrap .agHead .label{font-size:20px;letter-spacing:2px;color:#fff;text-shadow:3px 3px 0 rgba(0,0,0,.55)}
 .dleWrap .agHead .hint{color:color-mix(in srgb,var(--dle) 55%,#fff)}
 .dleWrap .agNav button,.dleWrap .row button{letter-spacing:1px}
 .dleWrap .mdInput{background:#0d0820;border:3px solid var(--dle);box-shadow:0 0 0 3px rgba(0,0,0,.45),0 0 16px color-mix(in srgb,var(--dle) 30%,transparent);transition:box-shadow .15s}
@@ -61,7 +61,7 @@ const HTML = "";
 .dleWrap .mdSugItem:hover,.dleWrap .mdSugItem.on{background:color-mix(in srgb,var(--dle) 28%,transparent)}
 .dleWrap .mdHint,.dleWrap .mdEmoji{box-shadow:inset 4px 0 0 var(--dle),0 0 0 3px rgba(0,0,0,.35)}
 .dleWrap .mdGuesses{gap:8px;padding:6px 0}
-.dleWrap .mdH{background:#160d30;color:#fff;border-bottom:3px solid var(--dle);padding:7px 2px;font-size:7px}
+.dleWrap .mdH{background:#160d30;color:#fff;border-bottom:3px solid var(--dle);padding:8px 4px;font-size:9px}
 .dleWrap .mdRow{gap:6px}
 .dleWrap .mdRow:not(.head) .mdCell{font-weight:bold;text-shadow:1px 1px 0 rgba(0,0,0,.5);box-shadow:inset 0 3px 0 rgba(255,255,255,.2),inset 0 -4px 0 rgba(0,0,0,.4),0 0 0 2px rgba(0,0,0,.55)}
 .dleWrap .mdCell.who{background:linear-gradient(#2a1d52,#1c1238);border-left:4px solid var(--dle)}
@@ -69,10 +69,13 @@ const HTML = "";
 .dleWrap .mdCell.ok{background:linear-gradient(#45c27b,#2f8f5a)}
 .dleWrap .mdCell.part{background:linear-gradient(#e8aa42,#c0862a)}
 .dleWrap .mdCell.no{background:linear-gradient(#cc3f5e,#9a2a44)}
-.dleWrap .mdCell.wide{font-size:16px}
+.dleWrap .mdCell.wide{font-size:19px}
+.dleWrap .hint{font-size:15px}
+.dleWrap .tab,.dleWrap .agNav button{font-size:15px}
+.dleBan{display:block;width:100%;height:144px;image-rendering:pixelated;box-shadow:0 0 0 3px var(--dle),6px 6px 0 3px rgba(0,0,0,.5)}
 .dleWrap .sysCard.mdWin{background:linear-gradient(135deg,#34265f,#160d30);border:3px solid #ffd07a;box-shadow:0 0 0 3px #000,0 0 30px rgba(255,208,122,.35);padding:16px}
 .dleWrap .mdWinImg{width:124px;height:124px}
-.dleWrap .mdWin b{font-size:19px;text-shadow:3px 3px 0 rgba(0,0,0,.5)}
+.dleWrap .mdWin b{font-size:22px;text-shadow:3px 3px 0 rgba(0,0,0,.5)}
 .dleWrap .mdPix{box-shadow:0 0 0 3px var(--dle),6px 6px 0 3px rgba(0,0,0,.5)}
 `;  // le style de ce plugin (il utilise les variables du thème de NeoDex)
 export default async function (ctx) {
@@ -231,7 +234,7 @@ function dleRender(g) {
   }
   u.newBtn.style.display = u.daily ? 'none' : '';
   // the guesses, the last one first
-  const list = u.guesses, cols = g.cols.length, grid = {gridTemplateColumns: '1.5fr repeat(' + cols + ',1fr)', minWidth: 150 + cols * 104 + 'px'};
+  const list = u.guesses, cols = g.cols.length, grid = {gridTemplateColumns: 'minmax(200px,1.5fr) repeat(' + cols + ',minmax(140px,1fr))', minWidth: 200 + cols * 146 + 'px'};
   list.replaceChildren();
   if (u.mode === 'classic' && tries) { const hr = el('div', 'mdRow head'); Object.assign(hr.style, grid); hr.append(el('span', 'mdH', 'Personnage'), ...g.cols.map(c => el('span', 'mdH', c.k))); list.append(hr); }
   for (const name of [...st.guesses].reverse()) {
@@ -245,6 +248,8 @@ function dleRender(g) {
       list.append(row);
     } else list.append(who);
   }
+  // un mot trop long pour sa case : seule cette case prend une police plus petite (9 px au plus petit)
+  requestAnimationFrame(() => { for (const c of list.querySelectorAll('.mdCell')) { let f = parseFloat(getComputedStyle(c).fontSize); while (c.scrollWidth > c.clientWidth + 1 && f > 9) c.style.fontSize = --f + 'px'; } });
 }
 function dleGuess(g, name) {
   const u = g.ui, st = dleState(g, u.mode, u.daily), c = dleChar(g, name);
@@ -265,6 +270,69 @@ function dleSuggest(g) {
   }));
   u.sug.style.display = hits.length ? '' : 'none'; u.hits = hits;
 }
+/* ---------- le bandeau : le décor de la série en pixel art (dessiné ici, 48 pixels de haut, agrandi 3 fois) et les portraits des personnages principaux ---------- */
+const DLE_SCENES = {
+  apothecarydle(P, W, H, r) {  // le palais intérieur la nuit : toits recourbés, murs rouges, lanternes
+    P.sky(['#0d0a24', '#1e1440', '#3a1e4a'], H - 10); P.moon(W * .2, 10, 6, '#f4e8c8');
+    for (let x = -10; x < W; x += 46 + (r() * 10 | 0)) { const w = 34 + (r() * 10 | 0), top = 14 + (r() * 8 | 0);
+      P.box(x + 3, top + 6, w - 6, H - top - 16, '#7a1e2a'); for (let k = x + 7; k < x + w - 7; k += 6) P.box(k, top + 10, 3, 5, '#ffcf6a');
+      for (let i = 0; i < 6; i++) P.box(x - 4 + i + (i > 3 ? 1 : 0), top + 5 - i, w + 8 - i * 2, 1, i ? '#1a3a3a' : '#0a1a1a'); P.box(x - 5, top + 6, 2, 1, '#0a1a1a'); P.box(x + w + 3, top + 6, 2, 1, '#0a1a1a');
+      P.box(x + w / 2 - 1, top + 12, 3, 4, '#ff4a3a'); P.box(x + w / 2, top + 13, 1, 2, '#ffd84a'); }
+    P.box(0, H - 10, W, 10, '#3a3048'); for (let x = 0; x < W; x += 8) P.box(x, H - 10, 1, 10, '#2a2238');
+  },
+  blackdle(P, W, H, r) {  // le ciel du royaume du Trèfle, des grimoires qui volent et des trèfles qui brillent
+    P.sky(['#2a5ab8', '#4a8ad8', '#8ac0f0'], H - 8);
+    for (let i = 0; i < 4; i++) P.cloud(r() * W, 6 + r() * 14, 10 + r() * 10);
+    for (let x = 4; x < W; x += 34 + (r() * 16 | 0)) { const y = 8 + (r() * 16 | 0), c = ['#2a8a3a', '#a82a3a', '#2a4aa8', '#8a6a2a'][r() * 4 | 0];
+      P.box(x, y, 18, 13, '#120c1a'); P.box(x + 1, y + 1, 16, 11, c); P.box(x + 9, y + 1, 1, 11, '#120c1a'); P.box(x + 3, y + 4, 2, 2, '#ffd84a'); P.box(x + 5, y + 4, 2, 2, '#ffd84a'); P.box(x + 4, y + 2, 2, 2, '#ffd84a'); P.box(x + 4, y + 6, 1, 3, '#ffd84a'); P.box(x + 11, y + 3, 4, 1, '#f4ecd8'); P.box(x + 11, y + 5, 4, 1, '#f4ecd8'); P.box(x + 11, y + 7, 3, 1, '#f4ecd8'); P.box(x - 3, y + 5, 1, 1, '#fff'); P.box(x + 20, y + 2, 1, 1, '#ffd84a'); P.box(x + 8, y - 3, 1, 1, '#fff'); }
+    P.box(0, H - 8, W, 8, '#3a7a2a'); for (let x = 0; x < W; x += 3) P.box(x, H - 9 - (x * 7 % 3), 1, 2, '#5aa83a');
+  },
+  bleachdle(P, W, H, r) {  // la Soul Society : les murs blancs du Seireitei, toits de tuiles, la colline au loin
+    P.sky(['#4a8ad8', '#7ab0e8', '#b8d8f4'], H - 8); P.cloud(W * .3, 8, 16); P.cloud(W * .75, 12, 12);
+    P.hill(W * .62, H - 18, 40, '#8a9ab0'); P.box(W * .62 - 1, H - 40, 3, 10, '#5a6a80');
+    for (let x = -6; x < W; x += 40 + (r() * 12 | 0)) { const w = 30 + (r() * 12 | 0), top = H - 22 - (r() * 8 | 0);
+      P.box(x, top + 3, w, H - top - 11, '#f4f0e8'); P.box(x, top + 3, w, 1, '#c8c0b0'); P.box(x - 2, top, w + 4, 3, '#4a5468'); P.box(x - 3, top + 2, w + 6, 1, '#2a3040');
+      for (let k = x + 4; k < x + w - 4; k += 7) P.box(k, top + 7, 3, 4, '#2a3040'); }
+    P.box(0, H - 8, W, 8, '#c8b890'); for (let x = 0; x < W; x += 6) P.box(x, H - 8, 1, 8, '#b0a078');
+  },
+  durararadle(P, W, H, r) {  // Ikebukuro la nuit : immeubles, fenêtres allumées, enseignes au néon
+    P.sky(['#0a0818', '#141030', '#2a1a40'], H - 8);
+    for (let x = 0; x < W; ) { const w = 12 + (r() * 14 | 0), h = 16 + (r() * 24 | 0), c = r() < .5 ? '#1a1830' : '#221e3a'; P.box(x, H - 8 - h, w, h, c);
+      for (let yy = H - 6 - h; yy < H - 10; yy += 4) for (let xx = x + 2; xx < x + w - 2; xx += 3) if (r() < .35) P.box(xx, yy, 1, 2, r() < .8 ? '#ffd86a' : '#8ae8ff');
+      if (r() < .4) P.box(x + 2, H - 4 - h, Math.min(w - 4, 8), 3, ['#ff4ad8', '#4af0ff', '#ffd04a'][r() * 3 | 0]); x += w + 1; }
+    P.box(0, H - 8, W, 8, '#141220'); for (let x = 2; x < W; x += 10) P.box(x, H - 4, 5, 1, '#ffd04a');
+  },
+  monodle(P, W, H, r) {  // le crépuscule, le torii du sanctuaire et ses marches, une grande lune blanche
+    P.sky(['#1a0a14', '#6a1a2a', '#c83a3a'], H); P.moon(W * .52, 15, 10, '#f8f0e8');
+    for (let i = 0; i < 4; i++) P.box(0, 6 + i * 9, W, 1, '#120810');
+    const tx = W * .3 | 0; P.box(tx - 18, 12, 36, 3, '#120810'); P.box(tx - 20, 11, 40, 1, '#120810'); P.box(tx - 14, 18, 28, 2, '#120810'); P.box(tx - 12, 12, 3, H - 16, '#120810'); P.box(tx + 9, 12, 3, H - 16, '#120810');
+    for (let i = 0; i < 5; i++) P.box(tx - 16 - i * 4, H - 4 - i * 2 + 6, 32 + i * 8, 2, i % 2 ? '#2a1018' : '#1a0810');
+  },
+};
+function dleBanner(g, w) {
+  const cv = el('canvas', 'dleBan'), H = 48, S = 3;
+  cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', g.series);
+  const heads = g.chars.filter(c => c.t === 1 && c.img).slice(0, 3), pics = heads.map(c => { const im = new Image(); im.src = dleImg(g, c); im.onload = () => draw(); return im; });
+  const draw = () => {
+    const W = Math.max(120, Math.round((cv.clientWidth || 600) / S)); if (cv.width !== W) { cv.width = W; cv.height = H; }
+    const x2 = cv.getContext('2d'), col = w.style.getPropertyValue('--dle') || '#fff'; x2.imageSmoothingEnabled = false;
+    let seed = dleHash(g.key); const r = () => ((seed = Math.imul(seed ^ seed >>> 15, 2246822507) + 0x6D2B79F5 >>> 0) % 10000) / 10000;
+    const P = {
+      box: (x, y, ww, hh, c) => { x2.fillStyle = c; x2.fillRect(Math.round(x), Math.round(y), Math.round(ww), Math.round(hh)); },
+      sky: (cs, h) => { for (let y = 0; y < h; y++) for (let x = 0; x < W; x++) { const t = y / h * (cs.length - 1), i = Math.min(cs.length - 2, t | 0), f = t - i; P.box(x, y, 1, 1, f > [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5][(y & 3) * 4 + (x & 3)] / 16 ? cs[i + 1] : cs[i]); } },
+      moon: (cx, cy, rr, c) => { for (let y = -rr; y <= rr; y++) for (let x = -rr; x <= rr; x++) if (x * x + y * y <= rr * rr) P.box(cx + x, cy + y, 1, 1, c); },
+      cloud: (cx, cy, ww) => { P.box(cx, cy, ww, 3, '#f4f8ff'); P.box(cx + 2, cy - 2, ww * .5, 2, '#f4f8ff'); P.box(cx + 1, cy + 3, ww - 2, 1, '#c8d8f0'); },
+      hill: (cx, by, ww, c) => { for (let i = 0; i < ww / 2; i++) P.box(cx - ww / 2 + i, by - i * .6, ww - i * 2, 1, c); },
+    };
+    (DLE_SCENES[g.key] || DLE_SCENES.monodle)(P, W, H, r);
+    pics.forEach((im, i) => { const sz = 36, x = W - (pics.length - i) * (sz + 6) - 2, y = 6;
+      P.box(x - 2, y - 2, sz + 4, sz + 4, '#0a0614'); P.box(x - 1, y - 1, sz + 2, sz + 2, col);
+      if (im.complete && im.naturalWidth) { const side = Math.min(im.naturalWidth, im.naturalHeight), sy = im.naturalHeight > im.naturalWidth ? 0 : (im.naturalHeight - side) / 2; x2.drawImage(im, (im.naturalWidth - side) / 2, sy, side, side, x, y, sz, sz); } else P.box(x, y, sz, sz, '#1c1238'); });
+  };
+  new ResizeObserver(() => draw()).observe(cv);
+  cv.__draw = draw;
+  return cv;
+}
 function dleRegister(g) {
   console.assert(g.chars.every(c => c.n && Array.isArray(c.h) && g.tiers[c.t] && g.cols.every(col => col.type !== 'set' || Array.isArray(c[col.id] || []))) && new Set(g.chars.map(c => c.n)).size === g.chars.length, g.key + ': well-formed, unique names');
   DLES[g.key] = g;
@@ -273,14 +341,14 @@ function dleRegister(g) {
   const v = $('dle_' + g.key) || el('div', 'appView'), w = el('div', 'appWrap'), head = el('div', 'agHead'), nav = el('div', 'agNav');
   if (!v.id) { v.id = 'dle_' + g.key; $('musicApp').before(v); }
   v.append(w);
-  w.classList.add('dleWrap'); w.style.setProperty('--dle', '#ffa24a');  // la couleur de la série
+  w.classList.add('dleWrap', 'wide'); w.style.setProperty('--dle', '#ffa24a');  // la couleur de la série
   const u = g.ui = {mode: 'classic', daily: true, info: el('span', 'hint'), dailyBtn: el('button', 'btn px', 'DÉFI DU JOUR'), freeBtn: el('button', 'btn px', 'PARTIE LIBRE'), pool: el('select', 'f gSel'), newBtn: el('button', 'btn px', 'NOUVELLE PARTIE'),
     modes: el('div', 'row'), clue: el('div', 'mdClue'), form: el('div', 'mdForm'), input: el('input', 'f mdInput'), sug: el('div', 'mdSug px'), win: el('div', 'sysCard px mdWin'), guesses: el('div', 'mdGuesses')};
   u.pool.title = 'Personnages possibles en partie libre';
   Object.assign(u.input, {placeholder: 'Nom d\'un personnage de ' + g.series + '…', spellcheck: false, autocomplete: 'off'});
   u.sug.style.display = 'none'; u.win.style.display = 'none';
   nav.append(u.dailyBtn, u.freeBtn, u.pool, u.newBtn); head.append(el('span', 'label', g.name), u.info, nav); u.form.append(u.input, u.sug);
-  w.append(head, u.modes, u.clue, u.form, u.win, u.guesses, el('div', 'hint', g.about));
+  w.append(head, dleBanner(g, w), u.modes, u.clue, u.form, u.win, u.guesses, el('div', 'hint', g.about));
   u.input.oninput = () => { u.sel = 0; dleSuggest(g); };
   u.input.onkeydown = e => {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); u.sel = Math.max(0, Math.min((u.hits?.length || 1) - 1, (u.sel || 0) + (e.key === 'ArrowDown' ? 1 : -1))); dleSuggest(g); }

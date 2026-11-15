@@ -37,3 +37,9 @@ Your streak, your statistics and today's game in progress are stored by NeoDex, 
 In NeoDex: **NeoStore → Discover → BleachDle → Install**.
 
 Building a plugin: see the [NeoDex SDK](https://github.com/NDesumeur/neodex-sdk).
+
+## What's new in version 1.4.0
+
+- **Illustrated banner** at the top of the game: the white walls of the Seireitei, in the Soul Society, drawn in pixel art, with the portraits of the main characters.
+- **Bigger texts**: input, suggestions, hints, headers and table cells.
+- **Cells of the right size**: wider columns, each cell grows in height for its text, and a word too long for its cell is written a bit smaller instead of overflowing.
