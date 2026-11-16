@@ -1,9 +1,9 @@
 {
   "pluginId": "neodex.bleachdle",
   "repo": "NDesumeur/neodex-plugin-bleachdle",
-  "version": "1.4.0",
-  "sha256": "8cec8da0fc6aafa6d4dce1de2f926a3781be535cfe96528309d435a94e621a63",
-  "approvedAt": "2026-11-16T04:14:33.976Z",
+  "version": "1.4.1",
+  "sha256": "4b1c4267f43dc373192f0c2b377be322f64abd79e56d289216b291c208aeda69",
+  "approvedAt": "2026-11-16T16:38:47.120Z",
   "neobase": ">=4.0.0",
-  "signature": "Lm0lzfhI4qU/EJaaeh9DHh0mYzTZgFAmE+6tWzfbOx3v5sCGqS3tDnZSy3TvZSp7XmKvoYeYsFUcwfxc/NzyDw=="
+  "signature": "+9D9ihqip07/BtDnR8+AoHNOjytRIc1K99Z1UW9WIlt/UFH/j3VEBbv5FVmWVrcSIpDDZ5PJSuiwKDkuRszXBA=="
 }
