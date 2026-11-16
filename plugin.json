@@ -1,7 +1,7 @@
 {
   "id": "neodex.bleachdle",
   "name": "BleachDle",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "author": "NDesumeur",
   "description": "Jeu de devinettes de Bleach : trouve le personnage mystère en tapant des noms. En mode Classique, chaque essai compare genre, race, affiliation et d'autres colonnes (vert : pareil, orange : proche) ; les modes Indices, Emoji et Image dévoilent un indice de plus à chaque essai raté. Un défi par jour et par mode, le même pour tous, des parties libres et ta série gardée. Version 1.4.0 : bandeau illustré en pixel art (les murs blancs du Seireitei, à la Soul Society, avec les portraits des personnages principaux), textes et zone de saisie plus grands, cases du tableau assez larges pour leur texte.",
   "icon": "icon.png",
