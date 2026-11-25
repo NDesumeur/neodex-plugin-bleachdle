@@ -102,6 +102,9 @@ export default async function (ctx) {
   const saveGames = () => { clearTimeout(gamesTimer); gamesTimer = setTimeout(() => { gamesTimer = null; folder.write('games', games).catch(() => {}); }, 500); };
   const best = (k, v, higher = true) => { const b = games.best[k]; if (b == null || (higher ? v > b : v < b)) { games.best[k] = v; saveGames(); return true; } return false; };
   const gstore = (k, init) => (games[k] ??= init);  // la section d'un jeu
+  // les trophées de NeoDex (3.4.8 et plus) : succès et records déclarés dans plugin.json ; sur un NeoDex plus ancien, rien ne se passe
+  const trophy = id => { ctx.games?.unlock(id).catch(() => {}); };
+  const trophyRecord = (id, v) => { if (v != null && Number.isFinite(+v)) ctx.games?.record(id, +v).catch(() => {}); };
 function gameLoop(st, appKey, update, draw) {
   cancelAnimationFrame(st.raf);
   const STEP = 1000 / 60; let acc = 0, last = performance.now();
@@ -129,7 +132,8 @@ function sprite(g, rows, x, y, pal) { rows.forEach((r, j) => { for (let i = 0; i
    A daily challenge per mode (the same for everyone) and free games, saved in games.<key> (synced). Portraits: web/dle/img/<series>/ (from the series' Fandom wiki). */
 
 const DLES = {};
-const DLE_MODES = {classic: 'Classique', hints: 'Indices', emoji: 'Emoji', image: 'Image'};
+const DLE_MODES = {classic: 'Classique', hints: 'Indices', emoji: 'Emoji', image: 'Image', shadow: 'Ombre', blur: 'Flou'};
+const DLE_PICS = ['image', 'shadow', 'blur'];  // les modes qui montrent le portrait
 const DLE_GENDER = {F: 'Femme', M: 'Homme', V: 'Variable', N: 'Aucun', '?': 'Inconnu'};
 const dleDay = (d = new Date()) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
 const dleHash = s => { let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
@@ -156,7 +160,7 @@ function dleCompare(g, guess, ans) {
 /* ---------- the save: games.<key> ---------- */
 const dleSave = g => gstore(g.key, {days: {}, stats: {}, free: null, pool: 'main', mode: 'classic'});
 const dlePool = (g, p) => g.chars.filter(c => c.t <= (g.pools[p] || g.pools.main).t);
-const dleFits = (c, mode) => mode === 'emoji' ? !!c.em : mode === 'image' ? !!c.img : mode === 'hints' ? c.h.length > 0 : true;
+const dleFits = (c, mode) => mode === 'emoji' ? !!c.em : DLE_PICS.includes(mode) ? !!c.img : mode === 'hints' ? c.h.length > 0 : true;
 function dleDaily(g, mode, day = dleDay()) {  // the same character for everyone on a given day, among the main pool
   const pool = dlePool(g, 'all').filter(c => dleFits(c, mode));
   return pool[dleHash(g.key + ':' + mode + ':' + day) % pool.length];
@@ -172,7 +176,8 @@ function dleState(g, mode, daily) {  // the game being played: today's challenge
 }
 function dleRecord(g, mode, daily, won, tries) {
   const st = (dleSave(g).stats[mode] ||= {played: 0, wins: 0, streak: 0, bestStreak: 0, tries: 0, lastDay: ''});
-  st.played++; if (won) { st.wins++; st.tries += tries; }
+  st.played++; if (won) { st.wins++; st.tries += tries; if (tries === 1) st.one = 1; }
+  setTimeout(dleTrophies);
   if (daily) {
     const y = new Date(); y.setDate(y.getDate() - 1);
     st.streak = won ? (st.lastDay === dleDay(y) ? st.streak + 1 : 1) : 0; st.bestStreak = Math.max(st.bestStreak, st.streak); st.lastDay = dleDay();
@@ -192,6 +197,33 @@ function dlePixel(cv, src, cells) {
     ctx.drawImage(t, 0, 0, cells, cells, 0, 0, S, S);
   };
   im.src = src;
+}
+
+/* ---------- Ombre : le portrait en ombre chinoise, 2 tons puis de plus en plus de tons après chaque erreur ;
+   Flou : le portrait flou qui se précise. Les portraits sont des images d'anime avec leur décor : l'ombre suit les zones sombres. ---------- */
+const DLE_TONES = [2, 3, 4, 5, 6, 8], DLE_BLUR = [26, 18, 12, 8, 5, 3, 1.5];
+function dleShade(cv, src, mode, lv) {
+  const im = new Image();
+  im.onload = () => {
+    const S = cv.width, side = Math.min(im.width, im.height), sx = (im.width - side) / 2, sy = im.height > im.width ? 0 : (im.height - side) / 2, ctx = cv.getContext('2d');
+    const max = mode === 'blur' ? DLE_BLUR.length : DLE_TONES.length;
+    if (lv >= max) { ctx.drawImage(im, sx, sy, side, side, 0, 0, S, S); return; }
+    if (mode === 'blur') { const b = DLE_BLUR[lv], m = b * 2; ctx.filter = 'blur(' + b + 'px)'; ctx.drawImage(im, sx, sy, side, side, -m, -m, S + 2 * m, S + 2 * m); ctx.filter = 'none'; return; }
+    ctx.filter = 'blur(1px)'; ctx.drawImage(im, sx, sy, side, side, 0, 0, S, S); ctx.filter = 'none';
+    const d = ctx.getImageData(0, 0, S, S), p = d.data, n = DLE_TONES[lv], L = new Float32Array(S * S);
+    for (let i = 0; i < L.length; i++) L[i] = p[i * 4] * .3 + p[i * 4 + 1] * .59 + p[i * 4 + 2] * .11;
+    const sorted = Float32Array.from(L).sort(), cut = Array.from({length: n - 1}, (_, k) => sorted[Math.floor(L.length * (k + 1) / n)]);  // autant de pixels dans chaque ton
+    for (let i = 0; i < L.length; i++) { let t = 0; while (t < cut.length && L[i] > cut[t]) t++; const v = t / (n - 1);
+      p[i * 4] = 12 + v * 220; p[i * 4 + 1] = 10 + v * 214; p[i * 4 + 2] = 18 + v * 190; p[i * 4 + 3] = 255; }
+    ctx.putImageData(d, 0, 0);
+  };
+  im.src = src;
+}
+// le résultat à coller ailleurs : les carrés de chaque essai (Classique : une case par colonne), sans le nom du personnage
+function dleShareText(g, u, st, ans) {
+  const sq = {ok: '🟩', part: '🟧'}, rows = st.guesses.map(n => { const c = dleChar(g, n); return !c ? '' : u.mode === 'classic' ? dleCompare(g, c, ans).map(r => sq[r.r] || '🟥').join('') : c.n === ans.n ? '🟩' : '🟥'; });
+  const day = new Date().toLocaleDateString('fr-FR');
+  return g.name + ' · ' + DLE_MODES[u.mode] + (u.daily ? ' · défi du ' + day : ' · partie libre') + ' : trouvé en ' + st.guesses.length + ' essai' + (st.guesses.length > 1 ? 's' : '') + '\n' + (u.mode === 'classic' ? rows.join('\n') : rows.join(''));
 }
 
 /* ---------- the page of one game ---------- */
@@ -218,6 +250,11 @@ function dleRender(g) {
     cv.width = cv.height = 240;
     top.append(el('span', 'label', st.won ? 'Portrait' : 'Portrait · netteté ' + (lv + 1) + ' / ' + (DLE_PIX.length + 1)), cv);
     dlePixel(cv, dleImg(g, ans), lv >= DLE_PIX.length ? 240 : DLE_PIX[lv]);
+  } else if (u.mode === 'shadow' || u.mode === 'blur') {
+    const max = u.mode === 'blur' ? DLE_BLUR.length : DLE_TONES.length, lv = st.won ? max : Math.min(tries, max), cv = el('canvas', 'mdPix');
+    cv.width = cv.height = 240; cv.style.imageRendering = 'auto';
+    top.append(el('span', 'label', st.won ? 'Portrait' : (u.mode === 'blur' ? 'Portrait flou' : 'Ombre') + ' · netteté ' + (lv + 1) + ' / ' + (max + 1)), cv);
+    dleShade(cv, dleImg(g, ans), u.mode, lv);
   } else {
     top.append(el('span', 'hint', 'Vert : pareil · orange : en partie' + (g.cols.some(c => c.near) ? ' ou proche' : '') + ' · rouge : différent · ' + g.arrows));
     if (!st.won && tries >= 6 && ans.va) top.append(el('div', 'mdHint px', 'Indice (6 essais) : voix japonaise ' + ans.va));
@@ -230,6 +267,8 @@ function dleRender(g) {
     const next = new Date(), txt = el('div', 'mdWinTxt'); next.setHours(24, 0, 0, 0);
     txt.append(el('b', '', 'Bravo ! C\'était ' + ans.n), el('span', 'hint', [ans.jp, 'trouvé en ' + tries + ' essai' + (tries > 1 ? 's' : ''), g.tiers[ans.t], ans.va && 'voix : ' + ans.va].filter(Boolean).join(' · ')),
       el('span', 'hint', u.daily ? 'Prochain défi dans ' + Math.ceil((next - Date.now()) / 3600e3) + ' h. Une partie libre en attendant ?' : 'Clique sur « Nouvelle partie » pour recommencer.'));
+    const share = el('button', 'btn px', 'PARTAGER'); share.style.alignSelf = 'flex-start'; share.onclick = () => navigator.clipboard.writeText(dleShareText(g, u, st, ans)).then(() => toast('Résultat copié'), () => toast('Impossible de copier', true));
+    txt.append(share);
     u.win.replaceChildren(...(ans.img ? [Object.assign(el('img', 'mdWinImg'), {src: dleImg(g, ans), alt: ''})] : []), txt);
   }
   u.newBtn.style.display = u.daily ? 'none' : '';
@@ -376,7 +415,7 @@ dleRegister({key: 'bleachdle', name: 'BleachDle', series: 'Bleach', dir: 'bleach
     {id: 'arc', k: '1er arc', type: 'ord', labels: ['Agent des âmes', 'Soul Society', 'Arrancar', 'Hueco Mundo', 'Faux Karakura', 'Fullbringer', 'Guerre de mille ans']},
   ],
   arrows: '↑ : le personnage à trouver est plus grand ou apparaît dans un arc plus tardif, ↓ : l\'inverse.',
-  about: 'Devine le personnage de Bleach. Classique : chaque essai compare genre, race, affiliation, division du Gotei 13 (la dernière connue), rang, taille (orange : à 5 cm près) et arc de sa première apparition dans le manga. Indices, Emoji et Image : un indice de plus à chaque essai raté (les indices finissent par le nom du zanpakutō ou de la résurrection).',
+  about: 'Devine le personnage de Bleach. Classique : chaque essai compare genre, race, affiliation, division du Gotei 13 (la dernière connue), rang, taille (orange : à 5 cm près) et arc de sa première apparition dans le manga. Indices, Emoji, Image, Ombre et Flou : un indice de plus à chaque essai raté (les indices finissent par le nom du zanpakutō ou de la résurrection).',
   chars: [
     {n: "Ichigo Kurosaki",t: 1,em: "🍓⚔️👹🌙🧡",h: ["Il a les cheveux orange et voit les fantômes depuis tout petit.","Son père tient une clinique.","Il reçoit ses pouvoirs d'une shinigami pour protéger sa famille.","Il est le shinigami remplaçant de Karakura.","Anniversaire : 15 juillet.","Zanpakutō : Zangetsu.","Bankai : Tensa Zangetsu.","Voix japonaise : Masakazu Morita."],va: "Masakazu Morita",g: "M",ra: "Hybride",af: ["Karakura"],di: "—",rg: "Shinigami remplaçant",ta: 174,arc: 0,img: "ichigo-kurosaki.webp"},
     {n: "Rukia Kuchiki",t: 1,em: "❄️🐰🎨🌙",h: ["Elle dessine très mal des lapins.","Elle a été adoptée par une grande famille noble.","Elle a transmis ses pouvoirs à un lycéen.","Elle finit capitaine de la 13e division.","Anniversaire : 14 janvier.","Zanpakutō : Sode no Shirayuki.","Bankai : Hakka no Togame.","Voix japonaise : Fumiko Orikasa."],va: "Fumiko Orikasa",g: "F",ra: "Shinigami",af: ["Gotei 13","Karakura"],di: "13e division",rg: "Capitaine",ta: 144,arc: 0,img: "rukia-kuchiki.webp"},
@@ -554,5 +593,13 @@ dleRegister({key: 'bleachdle', name: 'BleachDle', series: 'Bleach', dir: 'bleach
     {n: "Bonnie",t: 3,em: "🐗",h: ["C'est un sanglier.","Il est la monture de Ganju.","Race : Âme."],g: "F",ra: "Âme",af: [],di: "—",rg: "Aucun",ta: null,arc: 1,img: "bonnie.webp"},
   ]});  // (non indenté : les textes sur plusieurs lignes restent exactement les tiens)
   // ---- fin ----
-  ctx.onOpen(() => { dleOpen('bleachdle'); });
+  // les trophées, tirés des statistiques et des records gardés (aussi à l'ouverture : ce qui a été fait avant compte)
+  function dleTrophies() {
+    const s = Object.values(dleSave(DLES['bleachdle']).stats), w = s.reduce((a, x) => a + (x.wins || 0), 0), ser = Math.max(0, ...s.map(x => x.bestStreak || 0));
+    const modes = DLES['bleachdle'].ui?.modes?.querySelectorAll('[data-m]').length || 0, won = Object.entries(dleSave(DLES['bleachdle']).stats).filter(([, x]) => x.wins > 0).length;
+    trophyRecord('trouves', w || null); trophyRecord('serie', ser || null);
+    if (w >= 1) trophy('premier'); if (dleSave(DLES['bleachdle']).stats.classic?.wins >= 10) trophy('classique10'); if (w >= 50) trophy('cinquante'); if (w >= 100) trophy('cent');
+    if (won >= 3) trophy('modes3'); if (modes && won >= modes) trophy('modes'); if (ser >= 7) trophy('serie7'); if (ser >= 30) trophy('serie30'); if (s.some(x => x.one)) trophy('un');
+  }
+  ctx.onOpen(() => { dleOpen('bleachdle'); dleTrophies(); });
 }

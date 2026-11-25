@@ -4,9 +4,13 @@ A guessing game set in the world of **Bleach**: find the mystery character in as
 
 *Version française : [README.md](README.md)*
 
+## Shadow and Blur modes, and sharing (new in 1.5.0)
+
+Two new modes: Shadow (the portrait as a shadow drawing, one more tone after each miss) and Blur (the blurry portrait gets clearer). SHARE button: your result as squares, without the name.
+
 ## How to play
 
-1. Pick a mode at the top: **Classic**, **Hints**, **Emoji** or **Image**.
+1. Pick a mode at the top: **Classic**, **Hints**, **Emoji**, **Image**, **Shadow** or **Blur**.
 2. Type the start of a name in the field: the list suggests matching characters. Confirm with **Enter** or by clicking a suggestion.
 3. Read what the guess tells you, then try another character, until you find the right one.
 
@@ -16,6 +20,9 @@ A guessing game set in the world of **Bleach**: find the mystery character in as
 - **Hints**: a first hint about the character is given; every wrong guess reveals one more.
 - **Emoji**: the character is summed up in emojis, one more revealed after every wrong guess.
 - **Image**: their portrait starts very blurry and gets sharper after every wrong guess (up to nine levels of sharpness).
+- **Shadow**: their portrait as a shadow drawing, only two tones, then one more tone after every wrong guess.
+- **Blur**: their portrait heavily blurred, getting clearer after every wrong guess.
+- **SHARE**, once found: copies your result as squares (one row per guess in Classic), without the character's name.
 
 ## Daily challenge and free game
 

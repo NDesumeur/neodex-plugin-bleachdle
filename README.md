@@ -4,9 +4,13 @@ Un jeu de devinettes sur l'univers de **Bleach** : trouve le personnage mystère
 
 *English version: [README.en.md](README.en.md)*
 
+## Modes Ombre et Flou, et le partage (nouveau en 1.5.0)
+
+Deux nouveaux modes : Ombre (le portrait en ombre chinoise, un ton de plus à chaque erreur) et Flou (le portrait flou qui se précise). Bouton PARTAGER : le résultat en carrés, sans le nom.
+
 ## Comment jouer
 
-1. Choisis un mode en haut : **Classique**, **Indices**, **Emoji** ou **Image**.
+1. Choisis un mode en haut : **Classique**, **Indices**, **Emoji**, **Image**, **Ombre** ou **Flou**.
 2. Tape le début d'un nom dans le champ : la liste propose les personnages correspondants. Valide avec **Entrée** ou en cliquant sur une suggestion.
 3. Lis ce que l'essai t'apprend, puis propose un autre personnage, jusqu'à trouver le bon.
 
@@ -16,6 +20,9 @@ Un jeu de devinettes sur l'univers de **Bleach** : trouve le personnage mystère
 - **Indices** : un premier indice sur le personnage est donné ; chaque essai raté en révèle un de plus.
 - **Emoji** : le personnage est résumé par des emojis, dévoilés un de plus à chaque essai raté.
 - **Image** : son portrait est d'abord très flou et devient plus net à chaque essai raté (jusqu'à neuf niveaux de netteté).
+- **Ombre** : son portrait en ombre chinoise, deux tons seulement, puis un ton de plus à chaque essai raté.
+- **Flou** : son portrait très flou, qui se précise à chaque essai raté.
+- **PARTAGER**, une fois trouvé : copie ton résultat en carrés (une ligne par essai en Classique), sans le nom du personnage.
 
 ## Défi du jour et partie libre
 

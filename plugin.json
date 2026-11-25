@@ -1,16 +1,19 @@
 {
   "id": "neodex.bleachdle",
   "name": "BleachDle",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "author": "NDesumeur",
-  "description": "Jeu de devinettes de Bleach : trouve le personnage mystère en tapant des noms. En mode Classique, chaque essai compare genre, race, affiliation et d'autres colonnes (vert : pareil, orange : proche) ; les modes Indices, Emoji et Image dévoilent un indice de plus à chaque essai raté. Un défi par jour et par mode, le même pour tous, des parties libres et ta série gardée. Version 1.4.0 : bandeau illustré en pixel art (les murs blancs du Seireitei, à la Soul Society, avec les portraits des personnages principaux), textes et zone de saisie plus grands, cases du tableau assez larges pour leur texte.",
+  "description": "Jeu de devinettes de Bleach : trouve le personnage mystère en tapant des noms. En mode Classique, chaque essai compare genre, race, affiliation et d'autres colonnes (vert : pareil, orange : proche) ; les modes Indices, Emoji, Image, Ombre et Flou dévoilent un indice de plus à chaque essai raté. Un défi par jour et par mode, le même pour tous, des parties libres et ta série gardée. Version 1.4.0 : bandeau illustré en pixel art (les murs blancs du Seireitei, à la Soul Society, avec les portraits des personnages principaux), textes et zone de saisie plus grands, cases du tableau assez larges pour leur texte.",
   "icon": "icon.png",
   "entry": "index.js",
   "view": "bleachdle",
   "neobase": ">=4.0.0",
   "type": "app",
   "category": "NeoDle",
-  "compatibility": ["windows", "linux"],
+  "compatibility": [
+    "windows",
+    "linux"
+  ],
   "syncMode": "progression",
   "syncInfo": "Série, statistiques, partie du jour.",
   "mobile": false,
@@ -20,5 +23,67 @@
   "permissions": [
     "storage",
     "files"
+  ],
+  "succes": [
+    {
+      "id": "premier",
+      "nom": "Démasqué !",
+      "texte": "Trouver un premier personnage de Bleach"
+    },
+    {
+      "id": "classique10",
+      "nom": "Connaisseur",
+      "texte": "Trouver 10 personnages en Classique"
+    },
+    {
+      "id": "cinquante",
+      "nom": "Grand fan",
+      "texte": "Trouver 50 personnages"
+    },
+    {
+      "id": "cent",
+      "nom": "Encyclopédie vivante",
+      "texte": "Trouver 100 personnages"
+    },
+    {
+      "id": "modes3",
+      "nom": "Touche-à-tout",
+      "texte": "Gagner dans 3 modes différents"
+    },
+    {
+      "id": "modes",
+      "nom": "Tous les modes",
+      "texte": "Gagner dans chaque mode"
+    },
+    {
+      "id": "serie7",
+      "nom": "Une semaine",
+      "texte": "Trouver le personnage du jour 7 jours de suite (dans un mode)"
+    },
+    {
+      "id": "serie30",
+      "nom": "Un mois de suite",
+      "texte": "Trouver le personnage du jour 30 jours de suite (dans un mode)"
+    },
+    {
+      "id": "un",
+      "nom": "Du premier coup",
+      "texte": "Trouver un personnage dès le premier essai",
+      "cache": true
+    }
+  ],
+  "records": [
+    {
+      "id": "trouves",
+      "nom": "Personnages trouvés",
+      "sens": "haut",
+      "format": "nombre"
+    },
+    {
+      "id": "serie",
+      "nom": "Plus longue série de jours",
+      "sens": "haut",
+      "format": "nombre"
+    }
   ]
 }
